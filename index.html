@@ -26,6 +26,10 @@
                     <img class="layer hat-layer" id="hat-layer" style="display: none;">
                     <!-- 手持物品层 -->
                     <img class="layer handheld-layer" id="handheld-layer" style="display: none;">
+                    <!-- 无缝混合层 -->
+                    <div class="seamless-blend"></div>
+                    <!-- 调试区域（可选） -->
+                    <div class="debug-zones" id="debug-zones"></div>
                 </div>
             </div>
             <div class="action-buttons">
@@ -174,6 +178,18 @@
     </div>
 
     <script src="base-dog-image.js"></script>
+    <script src="body-parts-system.js"></script>
+    <script src="position-adjuster.js"></script>
     <script src="script.js"></script>
+    <script>
+        // 初始化位置调整器
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (typeof PositionAdjuster !== 'undefined') {
+                    PositionAdjuster.init();
+                }
+            }, 500);
+        });
+    </script>
 </body>
 </html>

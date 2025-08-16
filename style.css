@@ -42,8 +42,9 @@ body {
     height: 500px;
     background: white;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 #dress-up-canvas {
@@ -57,9 +58,6 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .layer {
@@ -70,48 +68,64 @@ body {
     max-width: 100%;
     max-height: 100%;
     pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 添加混合模式以实现无缝融合 */
+    mix-blend-mode: normal;
 }
 
+/* 基础层样式 */
 .base-layer {
     width: 300px;
-    height: auto;
-    z-index: 10;
+    height: 300px;
+    z-index: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
+/* 衣服层样式 - 添加柔和边缘 */
+.clothes-layer {
+    z-index: 4;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+    /* 羽化边缘效果 */
+    mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+}
+
+/* 项链层样式 - 添加光泽效果 */
+.necklace-layer {
+    z-index: 6;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2))
+            brightness(1.05);
+}
+
+/* 眼镜层样式 - 添加反光效果 */
+.glasses-layer {
+    z-index: 8;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))
+            contrast(1.1);
+    /* 添加微妙的反光 */
+    opacity: 0.95;
+}
+
+/* 帽子层样式 - 添加阴影深度 */
+.hat-layer {
+    z-index: 10;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+}
+
+/* 手持物品层样式 */
+.handheld-layer {
+    z-index: 3;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* 背景层样式 */
 .background-layer {
     width: 100%;
     height: 100%;
-    z-index: 1;
-    object-fit: cover;
-}
-
-.clothes-layer {
-    width: 280px;
-    z-index: 11;
-}
-
-.necklace-layer {
-    width: 150px;
-    z-index: 12;
-    transform: translate(-50%, -65%);
-}
-
-.glasses-layer {
-    width: 120px;
-    z-index: 13;
-    transform: translate(-50%, -80%);
-}
-
-.hat-layer {
-    width: 150px;
-    z-index: 14;
-    transform: translate(-50%, -120%);
-}
-
-.handheld-layer {
-    width: 100px;
-    z-index: 9;
-    transform: translate(-100%, -30%);
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* 操作按钮 */
@@ -323,7 +337,7 @@ body {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.95);
     }
     to {
         opacity: 1;
@@ -331,8 +345,72 @@ body {
     }
 }
 
-.layer {
-    animation: fadeIn 0.3s ease;
+@keyframes float {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-5px);
+    }
+}
+
+/* 悬停效果增强 */
+.layer:hover {
+    filter: brightness(1.1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* 为不同身体部位添加特定的混合效果 */
+.layer[data-body-part="head"] {
+    mask-image: ellipse(100px 120px at center);
+    -webkit-mask-image: ellipse(100px 120px at center);
+}
+
+.layer[data-body-part="neck"] {
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.layer[data-body-part="body"] {
+    mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+}
+
+/* 无缝拼接效果 */
+.seamless-blend {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.03) 25%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.03) 75%,
+        transparent 100%
+    );
+    mix-blend-mode: soft-light;
+}
+
+/* 添加身体部位区域的调试可视化（可选） */
+.debug-zones {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+    display: none; /* 默认隐藏 */
+}
+
+.debug-zones.active {
+    display: block;
+}
+
+.debug-zone {
+    position: absolute;
+    border: 1px dashed rgba(255, 0, 0, 0.3);
+    background: rgba(255, 0, 0, 0.05);
 }
 
 /* 加载动画 */
