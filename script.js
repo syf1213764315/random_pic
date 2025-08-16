@@ -48,8 +48,21 @@ const itemImages = {
     }
 };
 
+// 加载身体部位系统
+let bodyPartsLoaded = false;
+function loadBodyPartsSystem() {
+    const script = document.createElement('script');
+    script.src = 'body-parts-system.js';
+    script.onload = () => {
+        bodyPartsLoaded = true;
+        console.log('Body parts system loaded');
+    };
+    document.head.appendChild(script);
+}
+
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
+    loadBodyPartsSystem();
     initializeItems();
     setupEventListeners();
     loadBaseImage();
@@ -100,7 +113,7 @@ function handleItemClick(e) {
     updateDisplay(category, itemName);
 }
 
-// 更新显示层
+// 更新显示层 - 使用身体部位系统进行精确定位
 function updateDisplay(category, itemName) {
     const layer = document.getElementById(`${category}-layer`);
     
@@ -117,6 +130,22 @@ function updateDisplay(category, itemName) {
         } else {
             layer.src = itemImages[category][itemName];
             layer.style.display = 'block';
+            
+            // 使用身体部位系统进行精确定位
+            if (typeof BodyPartsSystem !== 'undefined') {
+                const position = BodyPartsSystem.getDecorationPosition(category, itemName);
+                if (position) {
+                    // 应用精确位置
+                    layer.style.position = 'absolute';
+                    layer.style.left = `${position.x}px`;
+                    layer.style.top = `${position.y}px`;
+                    layer.style.transform = `translate(-50%, -50%) scale(${position.scale}) rotate(${position.rotation}deg)`;
+                    layer.style.zIndex = position.zIndex;
+                    
+                    // 添加平滑过渡效果
+                    layer.style.transition = 'all 0.3s ease';
+                }
+            }
         }
     }
 }
@@ -152,7 +181,7 @@ function randomizeOutfit() {
     }, 10);
 }
 
-// 保存图片到本地
+// 增强的保存图片功能 - 使用身体部位系统进行无缝渲染
 async function saveImage() {
     const canvas = document.getElementById('dress-up-canvas');
     const ctx = canvas.getContext('2d');
@@ -161,6 +190,10 @@ async function saveImage() {
     canvas.width = 500;
     canvas.height = 500;
     canvas.style.display = 'block';
+    
+    // 启用抗锯齿
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
     
     // 清空画布
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -185,72 +218,106 @@ async function saveImage() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
     
-    // 绘制基础图片和装扮
-    const layers = [
-        { element: document.querySelector('.base-layer'), name: 'base' },
-        { element: document.getElementById('clothes-layer'), name: 'clothes' },
-        { element: document.getElementById('necklace-layer'), name: 'necklace' },
-        { element: document.getElementById('glasses-layer'), name: 'glasses' },
-        { element: document.getElementById('hat-layer'), name: 'hat' },
-        { element: document.getElementById('handheld-layer'), name: 'handheld' }
+    // 准备图层数据
+    const layers = [];
+    const layerElements = [
+        { element: document.querySelector('.base-layer'), name: 'base', category: null, item: null },
+        { element: document.getElementById('clothes-layer'), name: 'clothes', category: 'clothes', item: currentOutfit.clothes },
+        { element: document.getElementById('necklace-layer'), name: 'necklace', category: 'necklace', item: currentOutfit.necklace },
+        { element: document.getElementById('glasses-layer'), name: 'glasses', category: 'glasses', item: currentOutfit.glasses },
+        { element: document.getElementById('hat-layer'), name: 'hat', category: 'hat', item: currentOutfit.hat },
+        { element: document.getElementById('handheld-layer'), name: 'handheld', category: 'handheld', item: currentOutfit.handheld }
     ];
     
     // 等待所有图片加载
-    const loadPromises = layers.map(layer => {
+    const loadPromises = layerElements.map(layer => {
         return new Promise((resolve) => {
-            if (layer.element && layer.element.style.display !== 'none' && layer.element.src) {
-                const img = new Image();
-                img.crossOrigin = 'anonymous';
-                img.onload = () => resolve({ img, layer });
-                img.onerror = () => resolve(null);
-                img.src = layer.element.src;
-            } else {
+            if (!layer.element || layer.element.style.display === 'none') {
                 resolve(null);
+                return;
             }
+            
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                const layerData = {
+                    image: img,
+                    visible: true,
+                    name: layer.name
+                };
+                
+                // 使用身体部位系统获取精确位置
+                if (layer.category && layer.item && typeof BodyPartsSystem !== 'undefined') {
+                    let position = BodyPartsSystem.getDecorationPosition(layer.category, layer.item);
+                    if (position) {
+                        // 应用用户的手动调整
+                        if (typeof PositionAdjuster !== 'undefined') {
+                            position = PositionAdjuster.getAdjustedPosition(layer.item, position);
+                        }
+                        layerData.position = { x: position.x, y: position.y };
+                        layerData.scale = position.scale;
+                        layerData.rotation = position.rotation;
+                        layerData.zIndex = position.zIndex;
+                    }
+                } else if (layer.name === 'base') {
+                    // 基础图片居中
+                    layerData.position = { x: canvas.width / 2, y: canvas.height / 2 };
+                    layerData.scale = 1;
+                    layerData.zIndex = 0;
+                }
+                
+                resolve(layerData);
+            };
+            img.onerror = () => resolve(null);
+            img.src = layer.element.src;
         });
     });
     
-    const loadedImages = await Promise.all(loadPromises);
-    
-    // 绘制所有层
-    loadedImages.forEach(item => {
-        if (item && item.img) {
-            const { img, layer } = item;
-            let x = 250, y = 250, width = 300, height = 300;
-            
-            // 根据不同层调整位置和大小
-            switch(layer.name) {
-                case 'hat':
-                    y = 100;
-                    width = 150;
-                    height = 150;
-                    break;
-                case 'glasses':
-                    y = 150;
-                    width = 120;
-                    height = 120;
-                    break;
-                case 'necklace':
-                    y = 200;
-                    width = 150;
-                    height = 150;
-                    break;
-                case 'clothes':
-                    y = 280;
-                    width = 280;
-                    height = 280;
-                    break;
-                case 'handheld':
-                    x = 100;
-                    y = 250;
-                    width = 100;
-                    height = 100;
-                    break;
-            }
-            
-            ctx.drawImage(img, x - width/2, y - height/2, width, height);
-        }
+    const loadedLayers = await Promise.all(loadPromises);
+    loadedLayers.forEach(layer => {
+        if (layer) layers.push(layer);
     });
+    
+    // 使用身体部位系统渲染图层
+    if (typeof BodyPartsSystem !== 'undefined') {
+        BodyPartsSystem.renderLayers(ctx, layers);
+        
+        // 应用无缝混合
+        if (layers.length > 1) {
+            // 在头部和脖子之间创建无缝过渡
+            if (BodyPartsSystem.zones.head && BodyPartsSystem.zones.neck) {
+                BodyPartsSystem.createSeamlessBlend(ctx, BodyPartsSystem.zones.head, BodyPartsSystem.zones.neck);
+            }
+            // 在脖子和身体之间创建无缝过渡
+            if (BodyPartsSystem.zones.neck && BodyPartsSystem.zones.body) {
+                BodyPartsSystem.createSeamlessBlend(ctx, BodyPartsSystem.zones.neck, BodyPartsSystem.zones.body);
+            }
+        }
+    } else {
+        // 后备渲染方法
+        layers.sort((a, b) => (a.zIndex || 0) - (b.zIndex || 0));
+        layers.forEach(layer => {
+            if (layer.image && layer.visible) {
+                ctx.save();
+                if (layer.position) {
+                    ctx.translate(layer.position.x, layer.position.y);
+                }
+                if (layer.scale) {
+                    ctx.scale(layer.scale, layer.scale);
+                }
+                if (layer.rotation) {
+                    ctx.rotate(layer.rotation * Math.PI / 180);
+                }
+                ctx.drawImage(layer.image, -layer.image.width / 2, -layer.image.height / 2);
+                ctx.restore();
+            }
+        });
+    }
+    
+    // 隐藏画布
+    setTimeout(() => {
+        canvas.style.display = 'none';
+    }, 100);
     
     // 下载图片
     canvas.toBlob((blob) => {
@@ -260,12 +327,6 @@ async function saveImage() {
         a.download = `cute-dog-${Date.now()}.png`;
         a.click();
         URL.revokeObjectURL(url);
-        
-        // 隐藏canvas
-        canvas.style.display = 'none';
-        
-        // 显示成功提示
-        showNotification('图片已保存到本地！');
     });
 }
 
