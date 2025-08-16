@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可爱小狗装扮游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="canvas-container" id="canvas-container">
+                <canvas id="dress-up-canvas" width="500" height="500"></canvas>
+                <div class="costume-layers">
+                    <!-- 背景层 -->
+                    <img class="layer background-layer" id="background-layer" style="display: none;">
+                    <!-- 基础图片 -->
+                    <img class="layer base-layer" id="base-dog-img" alt="Base Dog">
+                    <!-- 衣服层 -->
+                    <img class="layer clothes-layer" id="clothes-layer" style="display: none;">
+                    <!-- 项链层 -->
+                    <img class="layer necklace-layer" id="necklace-layer" style="display: none;">
+                    <!-- 眼镜层 -->
+                    <img class="layer glasses-layer" id="glasses-layer" style="display: none;">
+                    <!-- 帽子层 -->
+                    <img class="layer hat-layer" id="hat-layer" style="display: none;">
+                    <!-- 手持物品层 -->
+                    <img class="layer handheld-layer" id="handheld-layer" style="display: none;">
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="save-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                        <polyline points="17 21 17 13 7 13 7 21"/>
+                        <polyline points="7 3 7 8 15 8"/>
+                    </svg>
+                    保存到本地
+                </button>
+                <button class="btn btn-secondary" id="share-x-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    分享到 X
+                </button>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h2>装扮你的小狗</h2>
+            <button class="btn btn-random" id="random-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <polyline points="1 4 1 10 7 10"/>
+                    <polyline points="23 20 23 14 17 14"/>
+                    <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                </svg>
+                随机搭配
+            </button>
+            
+            <!-- 帽子选项 -->
+            <div class="category">
+                <h3>🎩 帽子</h3>
+                <div class="items-grid">
+                    <div class="item" data-category="hat" data-item="none">
+                        <div class="item-preview none-item">无</div>
+                    </div>
+                    <div class="item" data-category="hat" data-item="cap">
+                        <img src="https://api.iconify.design/noto:billed-cap.svg" alt="棒球帽">
+                    </div>
+                    <div class="item" data-category="hat" data-item="wizard">
+                        <img src="https://api.iconify.design/noto:mage.svg" alt="巫师帽">
+                    </div>
+                    <div class="item" data-category="hat" data-item="crown">
+                        <img src="https://api.iconify.design/noto:crown.svg" alt="皇冠">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 项链选项 -->
+            <div class="category">
+                <h3>📿 项链</h3>
+                <div class="items-grid">
+                    <div class="item" data-category="necklace" data-item="none">
+                        <div class="item-preview none-item">无</div>
+                    </div>
+                    <div class="item" data-category="necklace" data-item="collar">
+                        <img src="https://api.iconify.design/fxemoji:collar.svg" alt="项圈">
+                    </div>
+                    <div class="item" data-category="necklace" data-item="bowtie">
+                        <img src="https://api.iconify.design/noto:necktie.svg" alt="领结">
+                    </div>
+                    <div class="item" data-category="necklace" data-item="medal">
+                        <img src="https://api.iconify.design/noto:sports-medal.svg" alt="奖牌">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 眼镜选项 -->
+            <div class="category">
+                <h3>👓 眼镜</h3>
+                <div class="items-grid">
+                    <div class="item" data-category="glasses" data-item="none">
+                        <div class="item-preview none-item">无</div>
+                    </div>
+                    <div class="item" data-category="glasses" data-item="sunglasses">
+                        <img src="https://api.iconify.design/noto:sunglasses.svg" alt="太阳镜">
+                    </div>
+                    <div class="item" data-category="glasses" data-item="glasses">
+                        <img src="https://api.iconify.design/noto:glasses.svg" alt="眼镜">
+                    </div>
+                    <div class="item" data-category="glasses" data-item="monocle">
+                        <img src="https://api.iconify.design/twemoji:monocle.svg" alt="单片眼镜">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 衣服选项 -->
+            <div class="category">
+                <h3>👔 衣服</h3>
+                <div class="items-grid">
+                    <div class="item" data-category="clothes" data-item="none">
+                        <div class="item-preview none-item">无</div>
+                    </div>
+                    <div class="item" data-category="clothes" data-item="tshirt">
+                        <img src="https://api.iconify.design/noto:t-shirt.svg" alt="T恤">
+                    </div>
+                    <div class="item" data-category="clothes" data-item="dress">
+                        <img src="https://api.iconify.design/noto:dress.svg" alt="连衣裙">
+                    </div>
+                    <div class="item" data-category="clothes" data-item="coat">
+                        <img src="https://api.iconify.design/noto:coat.svg" alt="外套">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 手持物品选项 -->
+            <div class="category">
+                <h3>🎈 手持物品</h3>
+                <div class="items-grid">
+                    <div class="item" data-category="handheld" data-item="none">
+                        <div class="item-preview none-item">无</div>
+                    </div>
+                    <div class="item" data-category="handheld" data-item="balloon">
+                        <img src="https://api.iconify.design/noto:balloon.svg" alt="气球">
+                    </div>
+                    <div class="item" data-category="handheld" data-item="flower">
+                        <img src="https://api.iconify.design/noto:rose.svg" alt="花朵">
+                    </div>
+                    <div class="item" data-category="handheld" data-item="gift">
+                        <img src="https://api.iconify.design/noto:wrapped-gift.svg" alt="礼物">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 背景选项 -->
+            <div class="category">
+                <h3>🌈 背景</h3>
+                <div class="items-grid">
+                    <div class="item" data-category="background" data-item="none">
+                        <div class="item-preview none-item">无</div>
+                    </div>
+                    <div class="item" data-category="background" data-item="park">
+                        <div class="item-preview bg-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">公园</div>
+                    </div>
+                    <div class="item" data-category="background" data-item="beach">
+                        <div class="item-preview bg-preview" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">海滩</div>
+                    </div>
+                    <div class="item" data-category="background" data-item="stars">
+                        <div class="item-preview bg-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">星空</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="base-dog-image.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
