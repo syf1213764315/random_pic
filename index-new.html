@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Builder - Fixed Layout</title>
+    <link rel="stylesheet" href="style-new.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Panel - Customization Options -->
+        <div class="customization-panel">
+            <!-- Category: Background -->
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-label">Background</span>
+                    <span class="selected-item" id="selected-background">Crimson</span>
+                    <button class="expand-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Category: Body -->
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-label">Body</span>
+                    <span class="selected-item" id="selected-body">Twilight Stripes</span>
+                    <button class="expand-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Category: Eyes -->
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-label">Eyes</span>
+                    <span class="selected-item" id="selected-eyes">Monad Flaming Eyes</span>
+                    <button class="expand-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Category: Head -->
+            <div class="category-section active">
+                <div class="category-header">
+                    <span class="category-label">Head</span>
+                    <span class="selected-item" id="selected-head">Cowboy Beepbop</span>
+                    <button class="expand-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Category: Shirt -->
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-label">Shirt</span>
+                    <span class="selected-item" id="selected-shirt">Workaholic</span>
+                    <button class="expand-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Category: Handle -->
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-label">Handle</span>
+                    <span class="selected-item" id="selected-handle">Gold Coin</span>
+                    <button class="expand-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Category: Mouth -->
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-label">Mouth</span>
+                    <span class="selected-item" id="selected-mouth">Shark Teeth</span>
+                    <button class="expand-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Social Connect Button -->
+            <div class="social-connect">
+                <p>Connect your socials for more traits</p>
+                <button class="connect-btn">Connect your socials</button>
+            </div>
+        </div>
+
+        <!-- Center Panel - Character Preview -->
+        <div class="preview-panel">
+            <div class="character-container">
+                <canvas id="character-canvas" width="500" height="500"></canvas>
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn save-btn" id="save-btn">
+                    <span class="btn-icon">💾</span>
+                    <span>Save</span>
+                </button>
+                <button class="action-btn copy-btn" id="copy-btn">
+                    <span class="btn-icon">📋</span>
+                    <span>Copy</span>
+                </button>
+                <button class="action-btn download-btn" id="download-btn">
+                    <span class="btn-icon">⬇</span>
+                    <span>Download</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Panel - Item Selection Grid -->
+        <div class="selection-panel">
+            <h2 class="panel-title">Head</h2>
+            
+            <div class="items-grid" id="items-grid">
+                <!-- None Option -->
+                <div class="item-card" data-category="head" data-item="none">
+                    <div class="item-preview">
+                        <div class="item-silhouette"></div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-name">None</span>
+                        <span class="item-rarity">Common</span>
+                    </div>
+                </div>
+
+                <!-- Cowboy Beepbop -->
+                <div class="item-card selected" data-category="head" data-item="cowboy-beepbop">
+                    <div class="item-preview">
+                        <img src="https://api.iconify.design/fxemoji:cowboyhat.svg" alt="Cowboy Hat">
+                    </div>
+                    <div class="item-info">
+                        <span class="item-name">Cowboy Beepbop</span>
+                        <span class="item-rarity epic">Epic</span>
+                    </div>
+                </div>
+
+                <!-- Visor Headphone -->
+                <div class="item-card" data-category="head" data-item="visor-headphone">
+                    <div class="item-preview">
+                        <img src="https://api.iconify.design/noto:headphone.svg" alt="Headphone">
+                    </div>
+                    <div class="item-info">
+                        <span class="item-name">Visor Headphone</span>
+                        <span class="item-rarity">Common</span>
+                    </div>
+                </div>
+
+                <!-- Plug -->
+                <div class="item-card" data-category="head" data-item="plug">
+                    <div class="item-preview">
+                        <img src="https://api.iconify.design/noto:electric-plug.svg" alt="Plug">
+                    </div>
+                    <div class="item-info">
+                        <span class="item-name">Plug</span>
+                        <span class="item-rarity">Common</span>
+                    </div>
+                </div>
+
+                <!-- More items can be added dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="base-dog-image.js"></script>
+    <script src="character-builder.js"></script>
+    <script src="app-new.js"></script>
+</body>
+</html>
