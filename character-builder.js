@@ -31,10 +31,10 @@ const CharacterBuilder = {
         
         // Body items (clothes) - adjusted positions (moved up and made larger)
         body: {
-            tshirt: { x: 250, y: 310, width: 380, height: 270, scale: 1.35, zIndex: 2 },
-            dress: { x: 250, y: 320, width: 410, height: 295, scale: 1.35, zIndex: 2 },
-            coat: { x: 250, y: 310, width: 440, height: 325, scale: 1.35, zIndex: 2 },
-            workaholic: { x: 250, y: 310, width: 380, height: 270, scale: 1.35, zIndex: 2 }
+            tshirt: { x: 250, y: 260, width: 380, height: 270, scale: 1.35, zIndex: 2 },
+            dress: { x: 250, y: 260, width: 410, height: 295, scale: 1.35, zIndex: 2 },
+            coat: { x: 250, y: 260, width: 440, height: 325, scale: 1.35, zIndex: 2 },
+            workaholic: { x: 250, y: 260, width: 380, height: 270, scale: 1.35, zIndex: 2 }
         },
         
         // Eyes accessories - adjusted for better fit (made larger)
@@ -61,10 +61,10 @@ const CharacterBuilder = {
         
         // Shirt/Neck accessories (ornaments) - adjusted positions (moved up and made larger)
         shirt: {
-            collar: { x: 250, y: 255, width: 190, height: 85, scale: 1.35, zIndex: 3 },
-            bowtie: { x: 250, y: 250, width: 110, height: 85, scale: 1.35, zIndex: 3 },
-            medal: { x: 250, y: 270, width: 138, height: 138, scale: 1.35, zIndex: 3 },
-            workaholic: { x: 250, y: 260, width: 168, height: 96, scale: 1.35, zIndex: 3 }
+            collar: { x: 250, y: 265, width: 190, height: 85, scale: 1.35, zIndex: 3 },
+            bowtie: { x: 250, y: 260, width: 110, height: 85, scale: 1.35, zIndex: 3 },
+            medal: { x: 250, y: 280, width: 138, height: 138, scale: 1.35, zIndex: 3 },
+            workaholic: { x: 250, y: 270, width: 168, height: 96, scale: 1.35, zIndex: 3 }
         },
         
         // Handle items (ornaments) - adjusted positions (moved up and made larger)
