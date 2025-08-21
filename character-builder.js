@@ -31,21 +31,21 @@ const CharacterBuilder = {
         
         // Body items (clothes) - adjusted positions (moved up and made larger)
         body: {
-            tshirt: { x: 250, y: 350, width: 380, height: 350, scale: 1.35, zIndex: 2 },
-            dress: { x: 250, y: 350, width: 410, height: 335, scale: 1.25, zIndex: 2 },
-            coat: { x: 250, y: 350, width: 430, height: 335, scale: 1.25, zIndex: 2 },
-            workaholic: { x: 250, y: 350, width: 380, height: 350, scale: 1.35, zIndex: 2 }
+            tshirt: { x: 250, y: 250, width: 380, height: 380, scale: 1.35, zIndex: 2 },
+            dress: { x: 250, y: 250, width: 410, height: 385, scale: 1.25, zIndex: 2 },
+            coat: { x: 250, y: 250, width: 430, height: 385, scale: 1.25, zIndex: 2 },
+            workaholic: { x: 250, y: 250, width: 380, height: 360, scale: 1.35, zIndex: 2 }
         },
         
         // Eyes accessories - adjusted for better fit (made larger)
         eyes: {
-            sunglasses: { x: 250, y: 215, width: 190, height: 85, scale: 1.35, zIndex: 5 },
-            glasses: { x: 250, y: 215, width: 180, height: 78, scale: 1.35, zIndex: 5 },
-            monocle: { x: 275, y: 210, width: 95, height: 95, scale: 1.35, zIndex: 5 },
-            'monad-flaming': { x: 250, y: 215, width: 210, height: 90, scale: 1.35, zIndex: 5 },
-            eye5: { x: 250, y: 215, width: 185, height: 80, scale: 1.35, zIndex: 5 },
-            eye6: { x: 250, y: 215, width: 200, height: 85, scale: 1.35, zIndex: 5 },
-            eye7: { x: 250, y: 215, width: 190, height: 85, scale: 1.35, zIndex: 5 }
+            sunglasses: { x: 250, y: 165, width: 190, height: 190, scale: 1.35, zIndex: 5 },
+            glasses: { x: 250, y: 165, width: 180, height: 180, scale: 1.35, zIndex: 5 },
+            monocle: { x: 275, y: 160, width: 95, height: 95, scale: 1.35, zIndex: 5 },
+            'monad-flaming': { x: 250, y: 165, width: 210, height: 210, scale: 1.35, zIndex: 5 },
+            eye5: { x: 250, y: 165, width: 185, height: 185, scale: 1.35, zIndex: 5 },
+            eye6: { x: 250, y: 165, width: 200, height: 200, scale: 1.35, zIndex: 5 },
+            eye7: { x: 250, y: 165, width: 190, height: 190, scale: 1.35, zIndex: 5 }
         },
         
         // Head accessories (hats) - adjusted for tap images (moved down and made larger)
