@@ -402,10 +402,10 @@ const CharacterBuilder = {
         const imageMap = {
             background: {
                 // Add your background image paths here
-                crimson: './website/background/4.png',
-                park: './website/background/1.png',
-                beach: './website/background/2.png',
-                stars: './website/background/3.png'
+                flower: './website/background/4.png',
+                fireworks: './website/background/1.png',
+                meadow: './website/background/2.png',
+                starry: './website/background/3.png'
                 // Add more background images as needed
             },
             body: {
