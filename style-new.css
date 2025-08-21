@@ -97,29 +97,73 @@ body {
     text-align: center;
 }
 
-.social-connect p {
-    font-size: 12px;
-    color: #808080;
-    margin-bottom: 12px;
+/* Action Links */
+.action-links {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.connect-btn {
-    width: 100%;
+.action-link-btn {
+    flex: 1;
     padding: 12px 20px;
-    background: #4CAF50;
+    background: #1a1a1a;
     color: white;
-    border: none;
+    text-decoration: none;
+    border: 2px solid #444;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
 }
 
-.connect-btn:hover {
-    background: #45a049;
+.action-link-btn.chat-btn {
+    background: #E84F4F;
+    border-color: #E84F4F;
+}
+
+.action-link-btn.chat-btn:hover {
+    background: #D63333;
+    border-color: #D63333;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 4px 12px rgba(232, 79, 79, 0.3);
+}
+
+.action-link-btn.build-btn {
+    background: transparent;
+    border-color: #E84F4F;
+    color: #E84F4F;
+}
+
+.action-link-btn.build-btn:hover {
+    background: rgba(232, 79, 79, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(232, 79, 79, 0.2);
+}
+
+/* Credits Section */
+.credits {
+    margin-top: 15px;
+}
+
+.credits p {
+    font-size: 12px;
+    color: #808080;
+    margin-bottom: 8px;
+}
+
+.credit-link {
+    color: #E84F4F;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.credit-link:hover {
+    color: #FF6B6B;
+    text-decoration: underline;
 }
 
 /* Center Panel - Character Preview */
