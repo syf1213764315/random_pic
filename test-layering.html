@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Background Layering</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .canvas-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            display: block;
+            margin: 0 auto;
+        }
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .control-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+        select {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-width: 200px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>背景图层测试 / Background Layering Test</h1>
+        
+        <div class="canvas-container">
+            <canvas id="character-canvas" width="500" height="500"></canvas>
+        </div>
+        
+        <div class="controls">
+            <h2>控制面板 / Controls</h2>
+            
+            <div class="control-group">
+                <label>背景 Background:</label>
+                <select id="background-select">
+                    <option value="none">None</option>
+                    <option value="crimson">Crimson</option>
+                    <option value="park">Park (Gradient)</option>
+                    <option value="beach">Beach (Gradient)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>身体 Body:</label>
+                <select id="body-select">
+                    <option value="none">None</option>
+                    <option value="tshirt">T-Shirt</option>
+                    <option value="dress">Dress</option>
+                    <option value="coat">Coat</option>
+                    <option value="workaholic">Workaholic</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>眼睛 Eyes:</label>
+                <select id="eyes-select">
+                    <option value="none">None</option>
+                    <option value="sunglasses">Sunglasses</option>
+                    <option value="glasses">Glasses</option>
+                    <option value="monad-flaming">Monad Flaming</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>头部 Head:</label>
+                <select id="head-select">
+                    <option value="none">None</option>
+                    <option value="cowboy-beepbop">Cowboy Beepbop</option>
+                    <option value="visor-headphone">Visor Headphone</option>
+                    <option value="plug">Plug</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <button onclick="testLayering()">测试图层 Test Layers</button>
+                <button onclick="clearCanvas()">清除 Clear</button>
+            </div>
+            
+            <div class="info">
+                <strong>说明 / Info:</strong><br>
+                修复了背景图会遮挡身体但显示衣服的问题。<br>
+                Fixed the issue where background image covers the body but shows clothes.<br><br>
+                <strong>渲染顺序 / Render Order:</strong><br>
+                1. 背景 Background (z-index: 0)<br>
+                2. 身体 Base Character (z-index: 1)<br>
+                3. 衣服 Clothes/Body (z-index: 2)<br>
+                4. 其他配件 Other Accessories (z-index: 3+)
+            </div>
+        </div>
+    </div>
+    
+    <script src="base-dog-image.js"></script>
+    <script src="character-builder.js"></script>
+    <script>
+        // Initialize character builder
+        CharacterBuilder.init();
+        
+        // Set initial values
+        CharacterBuilder.currentItems = {
+            background: 'crimson',
+            body: 'tshirt',
+            eyes: 'monad-flaming',
+            head: 'cowboy-beepbop',
+            shirt: 'none',
+            handle: 'none',
+            mouth: 'none'
+        };
+        
+        // Initial render
+        CharacterBuilder.render();
+        
+        // Bind select change events
+        document.getElementById('background-select').addEventListener('change', function(e) {
+            CharacterBuilder.updateItem('background', e.target.value);
+        });
+        
+        document.getElementById('body-select').addEventListener('change', function(e) {
+            CharacterBuilder.updateItem('body', e.target.value);
+        });
+        
+        document.getElementById('eyes-select').addEventListener('change', function(e) {
+            CharacterBuilder.updateItem('eyes', e.target.value);
+        });
+        
+        document.getElementById('head-select').addEventListener('change', function(e) {
+            CharacterBuilder.updateItem('head', e.target.value);
+        });
+        
+        // Test layering function
+        function testLayering() {
+            // Test with background and clothes
+            CharacterBuilder.currentItems.background = 'crimson';
+            CharacterBuilder.currentItems.body = 'tshirt';
+            CharacterBuilder.render();
+            
+            setTimeout(() => {
+                alert('检查图层顺序：背景应该在最底层，身体在中间，衣服在上层。\nCheck layer order: Background should be at bottom, body in middle, clothes on top.');
+            }, 500);
+        }
+        
+        // Clear canvas
+        function clearCanvas() {
+            CharacterBuilder.currentItems = {
+                background: 'none',
+                body: 'none',
+                eyes: 'none',
+                head: 'none',
+                shirt: 'none',
+                handle: 'none',
+                mouth: 'none'
+            };
+            CharacterBuilder.render();
+        }
+    </script>
+</body>
+</html>
