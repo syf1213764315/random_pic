@@ -50,13 +50,13 @@ const CharacterBuilder = {
         
         // Head accessories (hats) - adjusted for tap images (moved down and made larger)
         head: {
-            cap: { x: 250, y: 165, width: 260, height: 175, scale: 1.45, zIndex: 6 },
-            wizard: { x: 250, y: 145, width: 285, height: 220, scale: 1.45, zIndex: 6 },
-            crown: { x: 250, y: 160, width: 240, height: 160, scale: 1.45, zIndex: 6 },
-            'cowboy-beepbop': { x: 250, y: 165, width: 295, height: 185, scale: 1.45, zIndex: 6 },
-            'visor-headphone': { x: 250, y: 170, width: 270, height: 175, scale: 1.45, zIndex: 6 },
-            plug: { x: 250, y: 155, width: 230, height: 200, scale: 1.45, zIndex: 6 },
-            tap7: { x: 250, y: 150, width: 265, height: 180, scale: 1.45, zIndex: 6 }
+            cap: { x: 250, y: 190, width: 260, height: 175, scale: 1.45, zIndex: 6 },
+            wizard: { x: 250, y: 180, width: 285, height: 220, scale: 1.45, zIndex: 6 },
+            crown: { x: 250, y: 185, width: 240, height: 160, scale: 1.45, zIndex: 6 },
+            'cowboy-beepbop': { x: 250, y: 190, width: 295, height: 185, scale: 1.45, zIndex: 6 },
+            'visor-headphone': { x: 250, y: 195, width: 270, height: 175, scale: 1.45, zIndex: 6 },
+            plug: { x: 250, y: 180, width: 230, height: 200, scale: 1.45, zIndex: 6 },
+            tap7: { x: 250, y: 175, width: 265, height: 180, scale: 1.45, zIndex: 6 }
         },
         
         // Shirt/Neck accessories (ornaments) - adjusted positions (moved up and made larger)
