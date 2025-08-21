@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Builder Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .test-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-info h2 {
+            color: #DC143C;
+            margin-top: 0;
+        }
+        .test-info ul {
+            line-height: 1.8;
+        }
+        .test-info .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .canvas-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        button {
+            background: #DC143C;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #B91C3C;
+        }
+        .twitter-btn {
+            background: #1DA1F2;
+        }
+        .twitter-btn:hover {
+            background: #1a91da;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐕 Character Builder - Test Page</h1>
+        
+        <div class="test-info">
+            <h2>✅ Changes Implemented:</h2>
+            <ul>
+                <li class="success">1. ShareX功能 - 现在分享到Twitter/X平台</li>
+                <li class="success">2. 图片整体放大 - 所有元素尺寸增加15-20%</li>
+                <li class="success">3. Head位置调整 - 头部装饰下移到更自然的位置</li>
+                <li class="success">4. 服装和装饰位置调整 - 上移以更好地贴合身体</li>
+            </ul>
+            
+            <h2>📝 改进详情:</h2>
+            <ul>
+                <li><strong>基础角色:</strong> 尺寸从400x400增加到450x450，缩放1.15倍</li>
+                <li><strong>头部配件:</strong> 下移20-25像素，尺寸增加20%</li>
+                <li><strong>身体服装:</strong> 上移20像素，尺寸增加15%</li>
+                <li><strong>装饰品:</strong> 上移20像素，尺寸增加15%</li>
+                <li><strong>眼睛配件:</strong> 轻微下移10像素，尺寸增加15%</li>
+                <li><strong>嘴部配件:</strong> 下移10像素，尺寸增加15%</li>
+            </ul>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="test-canvas" width="500" height="500"></canvas>
+            <div class="button-group">
+                <button onclick="testRender()">测试渲染</button>
+                <button onclick="shareToTwitter()" class="twitter-btn">分享到 Twitter</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple test render
+        function testRender() {
+            const canvas = document.getElementById('test-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, 500, 500);
+            
+            // Draw background
+            const gradient = ctx.createLinearGradient(0, 0, 500, 500);
+            gradient.addColorStop(0, '#DC143C');
+            gradient.addColorStop(1, '#8B0000');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 500, 500);
+            
+            // Draw test character (placeholder)
+            ctx.fillStyle = '#FDB863';
+            ctx.beginPath();
+            ctx.arc(250, 260, 100, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw test text
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Test Character', 250, 450);
+            
+            alert('渲染测试完成！');
+        }
+        
+        // Share to Twitter function
+        function shareToTwitter() {
+            const canvas = document.getElementById('test-canvas');
+            
+            // Convert canvas to blob
+            canvas.toBlob((blob) => {
+                // Create a temporary URL for the image
+                const url = URL.createObjectURL(blob);
+                
+                // Create a temporary link to download the image first
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `character-${Date.now()}.png`;
+                a.click();
+                
+                // Open Twitter share dialog
+                const text = 'Check out my awesome character! 🎨✨';
+                const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+                
+                setTimeout(() => {
+                    window.open(shareUrl, '_blank', 'width=550,height=420');
+                    URL.revokeObjectURL(url);
+                }, 100);
+                
+                alert('正在打开Twitter分享窗口！请先保存图片，然后在Twitter上手动上传。');
+            });
+        }
+        
+        // Auto render on load
+        window.onload = testRender;
+    </script>
+</body>
+</html>
