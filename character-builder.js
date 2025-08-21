@@ -207,21 +207,53 @@ const CharacterBuilder = {
             ctx.fillStyle = '#F5F5F5';
             ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
         } else {
-            // Draw gradient backgrounds
-            const gradients = {
-                crimson: ['#DC143C', '#8B0000'],
-                park: ['#667eea', '#764ba2'],
-                beach: ['#f093fb', '#f5576c'],
-                stars: ['#4facfe', '#00f2fe']
-            };
+            // First try to load background image
+            const bgImageUrl = this.getItemImageUrl('background', bgType);
             
-            if (gradients[bgType]) {
-                const gradient = ctx.createLinearGradient(0, 0, this.canvasWidth, this.canvasHeight);
-                gradient.addColorStop(0, gradients[bgType][0]);
-                gradient.addColorStop(1, gradients[bgType][1]);
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+            if (bgImageUrl) {
+                // Load and draw background image
+                const bgImg = new Image();
+                bgImg.onload = () => {
+                    // Draw image to cover entire canvas
+                    ctx.drawImage(bgImg, 0, 0, this.canvasWidth, this.canvasHeight);
+                    
+                    // Redraw character on top of background
+                    this.drawCharacter();
+                };
+                bgImg.onerror = () => {
+                    // If image fails to load, fall back to gradient
+                    this.drawGradientBackground(bgType);
+                };
+                bgImg.src = bgImageUrl;
+            } else {
+                // If no image path defined, use gradient as fallback
+                this.drawGradientBackground(bgType);
             }
+        }
+    },
+    
+    // Draw gradient background (fallback when image is not available)
+    drawGradientBackground(bgType) {
+        const ctx = this.ctx;
+        
+        // Gradient backgrounds as fallback
+        const gradients = {
+            crimson: ['#DC143C', '#8B0000'],
+            park: ['#667eea', '#764ba2'],
+            beach: ['#f093fb', '#f5576c'],
+            stars: ['#4facfe', '#00f2fe']
+        };
+        
+        if (gradients[bgType]) {
+            const gradient = ctx.createLinearGradient(0, 0, this.canvasWidth, this.canvasHeight);
+            gradient.addColorStop(0, gradients[bgType][0]);
+            gradient.addColorStop(1, gradients[bgType][1]);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+        } else {
+            // Default gray background
+            ctx.fillStyle = '#F5F5F5';
+            ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
         }
     },
     
@@ -291,6 +323,14 @@ const CharacterBuilder = {
     getItemImageUrl(category, itemName) {
         // Map to existing item images or use new ones
         const imageMap = {
+            background: {
+                // Add your background image paths here
+                crimson: './website/background/crimson.png',
+                park: './website/background/park.png',
+                beach: './website/background/beach.png',
+                stars: './website/background/stars.png'
+                // Add more background images as needed
+            },
             body: {
                 tshirt: './website/cloth/1.png',
                 dress: './website/cloth/2.png',
