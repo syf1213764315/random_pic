@@ -4,10 +4,10 @@ const App = {
     items: {
         background: [
             { id: 'none', name: 'None', rarity: 'common' },
-            { id: 'crimson', name: 'Crimson', rarity: 'common' },
-            { id: 'park', name: 'Park', rarity: 'common' },
-            { id: 'beach', name: 'Beach', rarity: 'rare' },
-            { id: 'stars', name: 'Stars', rarity: 'epic' }
+            { id: 'flower', name: 'Flower', rarity: 'common' },
+            { id: 'fireworks', name: 'Fireworks', rarity: 'common' },
+            { id: 'meadow', name: 'Meadow', rarity: 'rare' },
+            { id: 'starry', name: 'Starry sky', rarity: 'epic' }
         ],
         body: [
             { id: 'none', name: 'None', rarity: 'common' },
