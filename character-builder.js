@@ -287,7 +287,7 @@ const CharacterBuilder = {
                 workaholic: 'https://api.iconify.design/noto:necktie.svg?width=200'
             },
             eyes: {
-                sunglasses: 'https://api.iconify.design/noto:sunglasses.svg?width=120',
+                sunglasses: './website/eyes/1.png',
                 glasses: 'https://api.iconify.design/noto:glasses.svg?width=120',
                 monocle: 'https://api.iconify.design/twemoji:monocle.svg?width=120',
                 'monad-flaming': 'https://api.iconify.design/noto:fire.svg?width=120'
@@ -313,7 +313,7 @@ const CharacterBuilder = {
                 'gold-coin': 'https://api.iconify.design/noto:coin.svg?width=100'
             },
             mouth: {
-                'shark-teeth': 'https://api.iconify.design/noto:shark.svg?width=60',
+                'shark-teeth': './website/mouth/1.png',
                 smile: 'https://api.iconify.design/noto:slightly-smiling-face.svg?width=60',
                 tongue: 'https://api.iconify.design/noto:face-with-tongue.svg?width=60'
             }
