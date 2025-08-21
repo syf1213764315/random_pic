@@ -43,9 +43,9 @@ const CharacterBuilder = {
             glasses: { x: 250, y: 195, width: 210, height: 180, scale: 1.35, zIndex: 5 },
             monocle: { x: 275, y: 190, width: 200, height:180, scale: 1.35, zIndex: 5 },
             'monad-flaming': { x: 250, y: 195, width: 210, height: 210, scale: 1.35, zIndex: 5 },
-            eye5: { x: 250, y: 225, width: 215, height: 185, scale: 2.35, zIndex: 5 },
-            eye6: { x: 250, y: 225, width: 200, height: 200, scale: 2.35, zIndex: 5 },
-            eye7: { x: 250, y: 225, width: 190, height: 190, scale: 2.35, zIndex: 5 }
+            eye5: { x: 250, y: 235, width: 215, height: 185, scale: 2.35, zIndex: 5 },
+            eye6: { x: 250, y: 235, width: 200, height: 200, scale: 2.35, zIndex: 5 },
+            eye7: { x: 250, y: 235, width: 190, height: 190, scale: 2.35, zIndex: 5 }
         },
         
         // Head accessories (hats) - adjusted for tap images (moved down and made larger)
@@ -77,13 +77,13 @@ const CharacterBuilder = {
         
         // Mouth accessories - adjusted for better positioning (made larger)
         mouth: {
-            'shark-teeth': { x: 250, y: 265, width: 110, height: 55, scale: 1.35, zIndex: 4 },
-            smile: { x: 250, y: 265, width: 96, height: 48, scale: 1.35, zIndex: 4 },
-            tongue: { x: 250, y: 270, width: 103, height: 62, scale: 1.35, zIndex: 4 },
-            mouth4: { x: 250, y: 265, width: 103, height: 53, scale: 1.35, zIndex: 4 },
-            mouth5: { x: 250, y: 265, width: 100, height: 49, scale: 1.35, zIndex: 4 },
-            mouth6: { x: 250, y: 267, width: 94, height: 47, scale: 1.35, zIndex: 4 },
-            mouth7: { x: 250, y: 265, width: 108, height: 55, scale: 1.35, zIndex: 4 }
+            'shark-teeth': { x: 210, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 },
+            smile: { x: 250, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 },
+            tongue: { x: 250, y: 230, width: 102103, height: 210, scale: 1.35, zIndex: 4 },
+            mouth4: { x: 250, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 },
+            mouth5: { x: 250, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 },
+            mouth6: { x: 250, y: 227, width: 210, height: 210, scale: 1.35, zIndex: 4 },
+            mouth7: { x: 250, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 }
         }
     },
     
