@@ -55,7 +55,7 @@ const CharacterBuilder = {
             crown: { x: 250, y: 185, width: 240, height: 160, scale: 1.45, zIndex: 6 },
             'cowboy-beepbop': { x: 250, y: 200, width: 295, height: 185, scale: 1.45, zIndex: 6 },
             'visor-headphone': { x: 250, y: 195, width: 270, height: 175, scale: 1.45, zIndex: 6 },
-            plug: { x: 250, y: 235, width: 230, height: 200, scale: 2.45, zIndex: 6 },
+            plug: { x: 250, y: 250, width: 230, height: 200, scale: 2.45, zIndex: 6 },
             tap7: { x: 250, y: 235, width: 265, height: 180, scale: 2.45, zIndex: 6 }
         },
         
