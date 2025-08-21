@@ -31,10 +31,10 @@ const CharacterBuilder = {
         
         // Body items (clothes) - adjusted positions (moved up and made larger)
         body: {
-            tshirt: { x: 250, y: 260, width: 380, height: 300, scale: 1.35, zIndex: 2 },
-            dress: { x: 250, y: 260, width: 410, height: 325, scale: 1.35, zIndex: 2 },
-            coat: { x: 250, y: 260, width: 430, height: 335, scale: 1.35, zIndex: 2 },
-            workaholic: { x: 250, y: 260, width: 380, height: 300, scale: 1.35, zIndex: 2 }
+            tshirt: { x: 250, y: 260, width: 380, height: 350, scale: 1.35, zIndex: 2 },
+            dress: { x: 250, y: 260, width: 410, height: 335, scale: 1.25, zIndex: 2 },
+            coat: { x: 250, y: 260, width: 430, height: 335, scale: 1.25, zIndex: 2 },
+            workaholic: { x: 250, y: 260, width: 380, height: 350, scale: 1.35, zIndex: 2 }
         },
         
         // Eyes accessories - adjusted for better fit (made larger)
