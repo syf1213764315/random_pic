@@ -299,12 +299,33 @@ const App = {
         }
     },
 
-    // Download character
+    // Share to Twitter/X
     downloadCharacter() {
-        if (CharacterBuilder) {
-            CharacterBuilder.saveAsImage();
-            this.showNotification('Download started!');
-        }
+        const canvas = document.getElementById('character-canvas');
+        if (!canvas) return;
+
+        // Convert canvas to blob and create a data URL for sharing
+        canvas.toBlob((blob) => {
+            // Create a temporary URL for the image
+            const url = URL.createObjectURL(blob);
+            
+            // Create a temporary link to download the image first
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `character-${Date.now()}.png`;
+            a.click();
+            
+            // Open Twitter share dialog
+            const text = 'Check out my awesome character! 🎨✨';
+            const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            
+            setTimeout(() => {
+                window.open(shareUrl, '_blank', 'width=550,height=420');
+                URL.revokeObjectURL(url);
+            }, 100);
+            
+            this.showNotification('Opening Twitter to share your character!');
+        });
     },
 
     // Connect socials
