@@ -23,9 +23,9 @@ const CharacterBuilder = {
         base: {
             x: 250,
             y: 260,
-            width: 500,
-            height: 500,
-            scale: 1.35,
+            width: 450,
+            height: 450,
+            scale: 1.15,
             zIndex: 1
         },
         
