@@ -39,13 +39,13 @@ const CharacterBuilder = {
         
         // Eyes accessories - adjusted for better fit (made larger)
         eyes: {
-            sunglasses: { x: 250, y: 235, width: 215, height: 185, scale: 2.35, zIndex: 5 },
-            glasses: { x: 250, y: 235, width: 215, height: 185, scale: 2.35, zIndex: 5 },
-            monocle: { x: 250, y: 235, width: 215, height:185, scale: 2.35, zIndex: 5 },
-            'monad-flaming': { x: 250, y: 235, width: 215, height: 185, scale: 2.35, zIndex: 5 },
-            eye5: { x: 250, y: 235, width: 215, height: 185, scale: 2.35, zIndex: 5 },
-            eye6: { x: 250, y: 235, width: 215, height: 185, scale: 2.35, zIndex: 5 },
-            eye7: { x: 250, y: 235, width: 215, height: 185, scale: 2.35, zIndex: 5 }
+            sunglasses: { x: 250, y: 245, width: 215, height: 185, scale: 2.35, zIndex: 5 },
+            glasses: { x: 250, y: 245, width: 215, height: 185, scale: 2.35, zIndex: 5 },
+            monocle: { x: 250, y: 245, width: 215, height:185, scale: 2.35, zIndex: 5 },
+            'monad-flaming': { x: 260, y: 235, width: 215, height: 185, scale: 2.35, zIndex: 5 },
+            eye5: { x: 250, y: 245, width: 215, height: 185, scale: 2.35, zIndex: 5 },
+            eye6: { x: 250, y: 245, width: 215, height: 185, scale: 2.35, zIndex: 5 },
+            eye7: { x: 250, y: 245, width: 215, height: 185, scale: 2.35, zIndex: 5 }
         },
         
         // Head accessories (hats) - adjusted for tap images (moved down and made larger)
