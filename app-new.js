@@ -21,7 +21,10 @@ const App = {
             { id: 'sunglasses', name: 'Sunglasses', rarity: 'common' },
             { id: 'glasses', name: 'Glasses', rarity: 'common' },
             { id: 'monocle', name: 'Monocle', rarity: 'rare' },
-            { id: 'monad-flaming', name: 'Monad Flaming Eyes', rarity: 'legendary' }
+            { id: 'monad-flaming', name: 'Monad Flaming Eyes', rarity: 'legendary' },
+            { id: 'eye5', name: 'Cool Eyes', rarity: 'rare' },
+            { id: 'eye6', name: 'Star Eyes', rarity: 'epic' },
+            { id: 'eye7', name: 'Laser Eyes', rarity: 'legendary' }
         ],
         head: [
             { id: 'none', name: 'None', rarity: 'common' },
@@ -30,7 +33,8 @@ const App = {
             { id: 'crown', name: 'Crown', rarity: 'epic' },
             { id: 'cowboy-beepbop', name: 'Cowboy Beepbop', rarity: 'epic' },
             { id: 'visor-headphone', name: 'Visor Headphone', rarity: 'common' },
-            { id: 'plug', name: 'Plug', rarity: 'common' }
+            { id: 'plug', name: 'Plug', rarity: 'common' },
+            { id: 'tap7', name: 'Special Hat', rarity: 'legendary' }
         ],
         shirt: [
             { id: 'none', name: 'None', rarity: 'common' },
@@ -50,7 +54,11 @@ const App = {
             { id: 'none', name: 'None', rarity: 'common' },
             { id: 'shark-teeth', name: 'Shark Teeth', rarity: 'epic' },
             { id: 'smile', name: 'Smile', rarity: 'common' },
-            { id: 'tongue', name: 'Tongue', rarity: 'common' }
+            { id: 'tongue', name: 'Tongue', rarity: 'common' },
+            { id: 'mouth4', name: 'Happy Mouth', rarity: 'rare' },
+            { id: 'mouth5', name: 'Cool Mouth', rarity: 'rare' },
+            { id: 'mouth6', name: 'Whistle', rarity: 'epic' },
+            { id: 'mouth7', name: 'Golden Teeth', rarity: 'legendary' }
         ]
     },
 

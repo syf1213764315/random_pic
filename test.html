@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Builder Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a2e;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #8B4FDB;
+        }
+        .canvas-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #0f0f23;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        canvas {
+            border: 2px solid #8B4FDB;
+            border-radius: 10px;
+            background: white;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .control-group {
+            background: #0f0f23;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .control-group h3 {
+            margin-top: 0;
+            color: #8B4FDB;
+        }
+        button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            background: #8B4FDB;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #7A3FC7;
+        }
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .image-item {
+            text-align: center;
+            padding: 10px;
+            background: #2a2a3e;
+            border-radius: 5px;
+        }
+        .image-item img {
+            max-width: 80px;
+            max-height: 80px;
+            object-fit: contain;
+        }
+        .image-item p {
+            margin: 5px 0 0 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Character Builder - Local Images Test</h1>
+        
+        <div class="canvas-container">
+            <canvas id="character-canvas" width="500" height="500"></canvas>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <h3>Body (身体)</h3>
+                <button onclick="changeItem('body', 'none')">None</button>
+                <button onclick="changeItem('body', 'tshirt')">T-Shirt</button>
+                <button onclick="changeItem('body', 'dress')">Dress</button>
+                <button onclick="changeItem('body', 'coat')">Coat</button>
+            </div>
+            
+            <div class="control-group">
+                <h3>Eyes (眼睛)</h3>
+                <button onclick="changeItem('eyes', 'none')">None</button>
+                <button onclick="changeItem('eyes', 'sunglasses')">Sunglasses</button>
+                <button onclick="changeItem('eyes', 'glasses')">Glasses</button>
+                <button onclick="changeItem('eyes', 'monocle')">Monocle</button>
+                <button onclick="changeItem('eyes', 'monad-flaming')">Flaming</button>
+                <button onclick="changeItem('eyes', 'eye5')">Cool Eyes</button>
+                <button onclick="changeItem('eyes', 'eye6')">Star Eyes</button>
+                <button onclick="changeItem('eyes', 'eye7')">Laser Eyes</button>
+            </div>
+            
+            <div class="control-group">
+                <h3>Head/Hat (帽子)</h3>
+                <button onclick="changeItem('head', 'none')">None</button>
+                <button onclick="changeItem('head', 'cap')">Cap</button>
+                <button onclick="changeItem('head', 'wizard')">Wizard</button>
+                <button onclick="changeItem('head', 'crown')">Crown</button>
+                <button onclick="changeItem('head', 'cowboy-beepbop')">Cowboy</button>
+                <button onclick="changeItem('head', 'visor-headphone')">Headphone</button>
+                <button onclick="changeItem('head', 'plug')">Plug</button>
+                <button onclick="changeItem('head', 'tap7')">Special</button>
+            </div>
+            
+            <div class="control-group">
+                <h3>Mouth (嘴巴)</h3>
+                <button onclick="changeItem('mouth', 'none')">None</button>
+                <button onclick="changeItem('mouth', 'shark-teeth')">Shark</button>
+                <button onclick="changeItem('mouth', 'smile')">Smile</button>
+                <button onclick="changeItem('mouth', 'tongue')">Tongue</button>
+                <button onclick="changeItem('mouth', 'mouth4')">Happy</button>
+                <button onclick="changeItem('mouth', 'mouth5')">Cool</button>
+                <button onclick="changeItem('mouth', 'mouth6')">Whistle</button>
+                <button onclick="changeItem('mouth', 'mouth7')">Golden</button>
+            </div>
+            
+            <div class="control-group">
+                <h3>Ornaments (装饰)</h3>
+                <button onclick="changeItem('shirt', 'none')">None</button>
+                <button onclick="changeItem('shirt', 'collar')">Collar</button>
+                <button onclick="changeItem('shirt', 'bowtie')">Bowtie</button>
+                <button onclick="changeItem('shirt', 'medal')">Medal</button>
+                <button onclick="changeItem('handle', 'balloon')">Balloon</button>
+                <button onclick="changeItem('handle', 'flower')">Flower</button>
+                <button onclick="changeItem('handle', 'gift')">Gift</button>
+                <button onclick="changeItem('handle', 'gold-coin')">Gold Coin</button>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <h3>Available Local Images (本地图片)</h3>
+            <div class="image-preview">
+                <div class="image-item">
+                    <img src="./website/body.png" alt="Body">
+                    <p>Body Base</p>
+                </div>
+                <div class="image-item">
+                    <img src="./website/tap/1.png" alt="Tap 1">
+                    <p>Hat 1</p>
+                </div>
+                <div class="image-item">
+                    <img src="./website/tap/2.png" alt="Tap 2">
+                    <p>Hat 2</p>
+                </div>
+                <div class="image-item">
+                    <img src="./website/eyes/1.png" alt="Eyes 1">
+                    <p>Eyes 1</p>
+                </div>
+                <div class="image-item">
+                    <img src="./website/mouth/1.png" alt="Mouth 1">
+                    <p>Mouth 1</p>
+                </div>
+                <div class="image-item">
+                    <img src="./website/cloth/1.png" alt="Cloth 1">
+                    <p>Cloth 1</p>
+                </div>
+                <div class="image-item">
+                    <img src="./website/ornament/1.png" alt="Ornament 1">
+                    <p>Ornament 1</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="character-builder.js"></script>
+    <script>
+        // Initialize the character builder
+        CharacterBuilder.init();
+        
+        // Function to change items
+        function changeItem(category, item) {
+            CharacterBuilder.updateItem(category, item);
+        }
+        
+        // Set some initial items
+        setTimeout(() => {
+            CharacterBuilder.updateItem('head', 'cowboy-beepbop');
+            CharacterBuilder.updateItem('eyes', 'sunglasses');
+            CharacterBuilder.updateItem('mouth', 'shark-teeth');
+        }, 500);
+    </script>
+</body>
+</html>

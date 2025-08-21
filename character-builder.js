@@ -19,63 +19,71 @@ const CharacterBuilder = {
             zIndex: 0
         },
         
-        // Base character
+        // Base character - adjusted for body.png
         base: {
             x: 250,
             y: 250,
-            width: 300,
-            height: 300,
+            width: 380,
+            height: 380,
             scale: 1,
             zIndex: 1
         },
         
-        // Body items (clothes)
+        // Body items (clothes) - adjusted positions
         body: {
-            tshirt: { x: 250, y: 320, width: 200, height: 150, scale: 1.2, zIndex: 2 },
-            dress: { x: 250, y: 330, width: 220, height: 180, scale: 1.3, zIndex: 2 },
-            coat: { x: 250, y: 320, width: 240, height: 160, scale: 1.3, zIndex: 2 },
-            workaholic: { x: 250, y: 320, width: 200, height: 150, scale: 1.2, zIndex: 2 }
+            tshirt: { x: 250, y: 300, width: 280, height: 200, scale: 1, zIndex: 2 },
+            dress: { x: 250, y: 310, width: 300, height: 220, scale: 1, zIndex: 2 },
+            coat: { x: 250, y: 300, width: 320, height: 240, scale: 1, zIndex: 2 },
+            workaholic: { x: 250, y: 300, width: 280, height: 200, scale: 1, zIndex: 2 }
         },
         
-        // Eyes accessories
+        // Eyes accessories - adjusted for better fit
         eyes: {
-            sunglasses: { x: 250, y: 180, width: 120, height: 40, scale: 1, zIndex: 5 },
-            glasses: { x: 250, y: 180, width: 110, height: 35, scale: 1, zIndex: 5 },
-            monocle: { x: 270, y: 175, width: 50, height: 50, scale: 0.8, zIndex: 5 },
-            'monad-flaming': { x: 250, y: 180, width: 130, height: 45, scale: 1.1, zIndex: 5 }
+            sunglasses: { x: 250, y: 200, width: 140, height: 60, scale: 1, zIndex: 5 },
+            glasses: { x: 250, y: 200, width: 130, height: 55, scale: 1, zIndex: 5 },
+            monocle: { x: 270, y: 195, width: 70, height: 70, scale: 1, zIndex: 5 },
+            'monad-flaming': { x: 250, y: 200, width: 150, height: 65, scale: 1, zIndex: 5 },
+            eye5: { x: 250, y: 200, width: 135, height: 58, scale: 1, zIndex: 5 },
+            eye6: { x: 250, y: 200, width: 145, height: 62, scale: 1, zIndex: 5 },
+            eye7: { x: 250, y: 200, width: 140, height: 60, scale: 1, zIndex: 5 }
         },
         
-        // Head accessories (hats)
+        // Head accessories (hats) - adjusted for tap images
         head: {
-            cap: { x: 250, y: 120, width: 150, height: 80, scale: 1.2, zIndex: 6 },
-            wizard: { x: 250, y: 100, width: 160, height: 120, scale: 1.3, zIndex: 6 },
-            crown: { x: 250, y: 110, width: 140, height: 70, scale: 1.1, zIndex: 6 },
-            'cowboy-beepbop': { x: 250, y: 115, width: 180, height: 90, scale: 1.3, zIndex: 6 },
-            'visor-headphone': { x: 250, y: 120, width: 160, height: 80, scale: 1.2, zIndex: 6 },
-            plug: { x: 250, y: 105, width: 100, height: 100, scale: 1, zIndex: 6 }
+            cap: { x: 250, y: 130, width: 180, height: 120, scale: 1, zIndex: 6 },
+            wizard: { x: 250, y: 110, width: 200, height: 150, scale: 1, zIndex: 6 },
+            crown: { x: 250, y: 120, width: 170, height: 110, scale: 1, zIndex: 6 },
+            'cowboy-beepbop': { x: 250, y: 125, width: 210, height: 130, scale: 1, zIndex: 6 },
+            'visor-headphone': { x: 250, y: 130, width: 190, height: 120, scale: 1, zIndex: 6 },
+            plug: { x: 250, y: 115, width: 160, height: 140, scale: 1, zIndex: 6 },
+            tap7: { x: 250, y: 120, width: 185, height: 125, scale: 1, zIndex: 6 }
         },
         
-        // Shirt/Neck accessories
+        // Shirt/Neck accessories (ornaments) - adjusted positions
         shirt: {
-            collar: { x: 250, y: 260, width: 120, height: 40, scale: 1, zIndex: 3 },
-            bowtie: { x: 250, y: 255, width: 60, height: 40, scale: 0.9, zIndex: 3 },
-            medal: { x: 250, y: 270, width: 80, height: 80, scale: 1, zIndex: 3 },
-            workaholic: { x: 250, y: 265, width: 100, height: 50, scale: 1, zIndex: 3 }
+            collar: { x: 250, y: 280, width: 140, height: 60, scale: 1, zIndex: 3 },
+            bowtie: { x: 250, y: 275, width: 80, height: 60, scale: 1, zIndex: 3 },
+            medal: { x: 250, y: 290, width: 100, height: 100, scale: 1, zIndex: 3 },
+            workaholic: { x: 250, y: 285, width: 120, height: 70, scale: 1, zIndex: 3 }
         },
         
-        // Handle items (handheld)
+        // Handle items (ornaments) - adjusted positions
         handle: {
-            balloon: { x: 350, y: 200, width: 80, height: 100, scale: 1, zIndex: 4 },
-            flower: { x: 150, y: 280, width: 60, height: 80, scale: 0.9, zIndex: 4 },
-            gift: { x: 340, y: 320, width: 70, height: 70, scale: 1, zIndex: 4 },
-            'gold-coin': { x: 160, y: 300, width: 60, height: 60, scale: 1, zIndex: 4 }
+            balloon: { x: 360, y: 220, width: 100, height: 120, scale: 1, zIndex: 4 },
+            flower: { x: 140, y: 300, width: 80, height: 100, scale: 1, zIndex: 4 },
+            gift: { x: 350, y: 340, width: 90, height: 90, scale: 1, zIndex: 4 },
+            'gold-coin': { x: 150, y: 320, width: 80, height: 80, scale: 1, zIndex: 4 }
         },
         
-        // Mouth accessories
+        // Mouth accessories - adjusted for better positioning
         mouth: {
-            'shark-teeth': { x: 250, y: 210, width: 60, height: 30, scale: 1, zIndex: 4 },
-            smile: { x: 250, y: 210, width: 50, height: 25, scale: 1, zIndex: 4 },
-            tongue: { x: 250, y: 215, width: 55, height: 35, scale: 1, zIndex: 4 }
+            'shark-teeth': { x: 250, y: 240, width: 80, height: 40, scale: 1, zIndex: 4 },
+            smile: { x: 250, y: 240, width: 70, height: 35, scale: 1, zIndex: 4 },
+            tongue: { x: 250, y: 245, width: 75, height: 45, scale: 1, zIndex: 4 },
+            mouth4: { x: 250, y: 240, width: 75, height: 38, scale: 1, zIndex: 4 },
+            mouth5: { x: 250, y: 240, width: 72, height: 36, scale: 1, zIndex: 4 },
+            mouth6: { x: 250, y: 242, width: 68, height: 34, scale: 1, zIndex: 4 },
+            mouth7: { x: 250, y: 240, width: 78, height: 40, scale: 1, zIndex: 4 }
         }
     },
     
@@ -117,18 +125,21 @@ const CharacterBuilder = {
         const baseImg = new Image();
         baseImg.crossOrigin = 'anonymous';
         
-        // Use the base dog image if available
-        if (typeof DOG_BASE64 !== 'undefined') {
-            baseImg.src = DOG_BASE64;
-        } else {
-            // Create a simple character shape
-            this.drawPlaceholderCharacter();
-            return;
-        }
+        // Use the local body.png image
+        baseImg.src = './website/body.png';
         
         baseImg.onload = () => {
             this.baseImage = baseImg;
             this.render();
+        };
+        
+        baseImg.onerror = () => {
+            // Fallback to base64 or placeholder if local image fails
+            if (typeof DOG_BASE64 !== 'undefined') {
+                baseImg.src = DOG_BASE64;
+            } else {
+                this.drawPlaceholderCharacter();
+            }
         };
     },
     
@@ -281,41 +292,49 @@ const CharacterBuilder = {
         // Map to existing item images or use new ones
         const imageMap = {
             body: {
-                tshirt: 'https://api.iconify.design/noto:t-shirt.svg?width=200',
-                dress: 'https://api.iconify.design/noto:dress.svg?width=200',
-                coat: 'https://api.iconify.design/noto:coat.svg?width=200',
-                workaholic: 'https://api.iconify.design/noto:necktie.svg?width=200'
+                tshirt: './website/cloth/1.png',
+                dress: './website/cloth/2.png',
+                coat: './website/cloth/3.png',
+                workaholic: './website/cloth/1.png'
             },
             eyes: {
                 sunglasses: './website/eyes/1.png',
-                glasses: 'https://api.iconify.design/noto:glasses.svg?width=120',
-                monocle: 'https://api.iconify.design/twemoji:monocle.svg?width=120',
-                'monad-flaming': 'https://api.iconify.design/noto:fire.svg?width=120'
+                glasses: './website/eyes/2.png',
+                monocle: './website/eyes/3.png',
+                'monad-flaming': './website/eyes/4.png',
+                eye5: './website/eyes/5.png',
+                eye6: './website/eyes/6.png',
+                eye7: './website/eyes/7.png'
             },
             head: {
-                cap: 'https://api.iconify.design/noto:billed-cap.svg?width=150',
-                wizard: 'https://api.iconify.design/noto:mage.svg?width=150',
-                crown: 'https://api.iconify.design/noto:crown.svg?width=150',
-                'cowboy-beepbop': 'https://api.iconify.design/fxemoji:cowboyhat.svg?width=150',
-                'visor-headphone': 'https://api.iconify.design/noto:headphone.svg?width=150',
-                plug: 'https://api.iconify.design/noto:electric-plug.svg?width=150'
+                cap: './website/tap/1.png',
+                wizard: './website/tap/2.png',
+                crown: './website/tap/3.png',
+                'cowboy-beepbop': './website/tap/4.png',
+                'visor-headphone': './website/tap/5.png',
+                plug: './website/tap/6.png',
+                tap7: './website/tap/7.png'
             },
             shirt: {
-                collar: 'https://api.iconify.design/fxemoji:collar.svg?width=120',
-                bowtie: 'https://api.iconify.design/noto:necktie.svg?width=120',
-                medal: 'https://api.iconify.design/noto:sports-medal.svg?width=120',
-                workaholic: 'https://api.iconify.design/noto:briefcase.svg?width=120'
+                collar: './website/ornament/1.png',
+                bowtie: './website/ornament/2.png',
+                medal: './website/ornament/3.png',
+                workaholic: './website/ornament/4.png'
             },
             handle: {
-                balloon: 'https://api.iconify.design/noto:balloon.svg?width=100',
-                flower: 'https://api.iconify.design/noto:rose.svg?width=100',
-                gift: 'https://api.iconify.design/noto:wrapped-gift.svg?width=100',
-                'gold-coin': 'https://api.iconify.design/noto:coin.svg?width=100'
+                balloon: './website/ornament/5.png',
+                flower: './website/ornament/6.png',
+                gift: './website/ornament/7.png',
+                'gold-coin': './website/ornament/8.png'
             },
             mouth: {
                 'shark-teeth': './website/mouth/1.png',
-                smile: 'https://api.iconify.design/noto:slightly-smiling-face.svg?width=60',
-                tongue: 'https://api.iconify.design/noto:face-with-tongue.svg?width=60'
+                smile: './website/mouth/2.png',
+                tongue: './website/mouth/3.png',
+                mouth4: './website/mouth/4.png',
+                mouth5: './website/mouth/5.png',
+                mouth6: './website/mouth/6.png',
+                mouth7: './website/mouth/7.png'
             }
         };
         
