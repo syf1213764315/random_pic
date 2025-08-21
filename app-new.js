@@ -77,7 +77,8 @@ const App = {
             CharacterBuilder.updateItem('eyes', 'monad-flaming');
             CharacterBuilder.updateItem('head', 'cowboy-beepbop');
             CharacterBuilder.updateItem('shirt', 'workaholic');
-            CharacterBuilder.updateItem('handle', 'gold-coin');
+            // Handle is hidden - not setting initial value
+            // CharacterBuilder.updateItem('handle', 'gold-coin');
             CharacterBuilder.updateItem('mouth', 'shark-teeth');
         }
 

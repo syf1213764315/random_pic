@@ -22,49 +22,49 @@ const CharacterBuilder = {
         // Base character - adjusted for body.png
         base: {
             x: 250,
-            y: 250,
-            width: 380,
-            height: 380,
+            y: 270,
+            width: 400,
+            height: 400,
             scale: 1,
             zIndex: 1
         },
         
         // Body items (clothes) - adjusted positions
         body: {
-            tshirt: { x: 250, y: 300, width: 280, height: 200, scale: 1, zIndex: 2 },
-            dress: { x: 250, y: 310, width: 300, height: 220, scale: 1, zIndex: 2 },
-            coat: { x: 250, y: 300, width: 320, height: 240, scale: 1, zIndex: 2 },
-            workaholic: { x: 250, y: 300, width: 280, height: 200, scale: 1, zIndex: 2 }
+            tshirt: { x: 250, y: 320, width: 280, height: 200, scale: 1, zIndex: 2 },
+            dress: { x: 250, y: 330, width: 300, height: 220, scale: 1, zIndex: 2 },
+            coat: { x: 250, y: 320, width: 320, height: 240, scale: 1, zIndex: 2 },
+            workaholic: { x: 250, y: 320, width: 280, height: 200, scale: 1, zIndex: 2 }
         },
         
         // Eyes accessories - adjusted for better fit
         eyes: {
-            sunglasses: { x: 250, y: 200, width: 140, height: 60, scale: 1, zIndex: 5 },
-            glasses: { x: 250, y: 200, width: 130, height: 55, scale: 1, zIndex: 5 },
-            monocle: { x: 270, y: 195, width: 70, height: 70, scale: 1, zIndex: 5 },
-            'monad-flaming': { x: 250, y: 200, width: 150, height: 65, scale: 1, zIndex: 5 },
-            eye5: { x: 250, y: 200, width: 135, height: 58, scale: 1, zIndex: 5 },
-            eye6: { x: 250, y: 200, width: 145, height: 62, scale: 1, zIndex: 5 },
-            eye7: { x: 250, y: 200, width: 140, height: 60, scale: 1, zIndex: 5 }
+            sunglasses: { x: 250, y: 210, width: 140, height: 60, scale: 1, zIndex: 5 },
+            glasses: { x: 250, y: 210, width: 130, height: 55, scale: 1, zIndex: 5 },
+            monocle: { x: 270, y: 205, width: 70, height: 70, scale: 1, zIndex: 5 },
+            'monad-flaming': { x: 250, y: 210, width: 150, height: 65, scale: 1, zIndex: 5 },
+            eye5: { x: 250, y: 210, width: 135, height: 58, scale: 1, zIndex: 5 },
+            eye6: { x: 250, y: 210, width: 145, height: 62, scale: 1, zIndex: 5 },
+            eye7: { x: 250, y: 210, width: 140, height: 60, scale: 1, zIndex: 5 }
         },
         
         // Head accessories (hats) - adjusted for tap images
         head: {
-            cap: { x: 250, y: 130, width: 180, height: 120, scale: 1, zIndex: 6 },
-            wizard: { x: 250, y: 110, width: 200, height: 150, scale: 1, zIndex: 6 },
-            crown: { x: 250, y: 120, width: 170, height: 110, scale: 1, zIndex: 6 },
-            'cowboy-beepbop': { x: 250, y: 125, width: 210, height: 130, scale: 1, zIndex: 6 },
-            'visor-headphone': { x: 250, y: 130, width: 190, height: 120, scale: 1, zIndex: 6 },
-            plug: { x: 250, y: 115, width: 160, height: 140, scale: 1, zIndex: 6 },
-            tap7: { x: 250, y: 120, width: 185, height: 125, scale: 1, zIndex: 6 }
+            cap: { x: 250, y: 140, width: 180, height: 120, scale: 1, zIndex: 6 },
+            wizard: { x: 250, y: 120, width: 200, height: 150, scale: 1, zIndex: 6 },
+            crown: { x: 250, y: 130, width: 170, height: 110, scale: 1, zIndex: 6 },
+            'cowboy-beepbop': { x: 250, y: 135, width: 210, height: 130, scale: 1, zIndex: 6 },
+            'visor-headphone': { x: 250, y: 140, width: 190, height: 120, scale: 1, zIndex: 6 },
+            plug: { x: 250, y: 125, width: 160, height: 140, scale: 1, zIndex: 6 },
+            tap7: { x: 250, y: 130, width: 185, height: 125, scale: 1, zIndex: 6 }
         },
         
         // Shirt/Neck accessories (ornaments) - adjusted positions
         shirt: {
-            collar: { x: 250, y: 280, width: 140, height: 60, scale: 1, zIndex: 3 },
-            bowtie: { x: 250, y: 275, width: 80, height: 60, scale: 1, zIndex: 3 },
-            medal: { x: 250, y: 290, width: 100, height: 100, scale: 1, zIndex: 3 },
-            workaholic: { x: 250, y: 285, width: 120, height: 70, scale: 1, zIndex: 3 }
+            collar: { x: 250, y: 300, width: 140, height: 60, scale: 1, zIndex: 3 },
+            bowtie: { x: 250, y: 295, width: 80, height: 60, scale: 1, zIndex: 3 },
+            medal: { x: 250, y: 310, width: 100, height: 100, scale: 1, zIndex: 3 },
+            workaholic: { x: 250, y: 305, width: 120, height: 70, scale: 1, zIndex: 3 }
         },
         
         // Handle items (ornaments) - adjusted positions
@@ -77,13 +77,13 @@ const CharacterBuilder = {
         
         // Mouth accessories - adjusted for better positioning
         mouth: {
-            'shark-teeth': { x: 250, y: 240, width: 80, height: 40, scale: 1, zIndex: 4 },
-            smile: { x: 250, y: 240, width: 70, height: 35, scale: 1, zIndex: 4 },
-            tongue: { x: 250, y: 245, width: 75, height: 45, scale: 1, zIndex: 4 },
-            mouth4: { x: 250, y: 240, width: 75, height: 38, scale: 1, zIndex: 4 },
-            mouth5: { x: 250, y: 240, width: 72, height: 36, scale: 1, zIndex: 4 },
-            mouth6: { x: 250, y: 242, width: 68, height: 34, scale: 1, zIndex: 4 },
-            mouth7: { x: 250, y: 240, width: 78, height: 40, scale: 1, zIndex: 4 }
+            'shark-teeth': { x: 250, y: 250, width: 80, height: 40, scale: 1, zIndex: 4 },
+            smile: { x: 250, y: 250, width: 70, height: 35, scale: 1, zIndex: 4 },
+            tongue: { x: 250, y: 255, width: 75, height: 45, scale: 1, zIndex: 4 },
+            mouth4: { x: 250, y: 250, width: 75, height: 38, scale: 1, zIndex: 4 },
+            mouth5: { x: 250, y: 250, width: 72, height: 36, scale: 1, zIndex: 4 },
+            mouth6: { x: 250, y: 252, width: 68, height: 34, scale: 1, zIndex: 4 },
+            mouth7: { x: 250, y: 250, width: 78, height: 40, scale: 1, zIndex: 4 }
         }
     },
     
