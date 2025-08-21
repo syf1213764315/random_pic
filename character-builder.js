@@ -32,20 +32,20 @@ const CharacterBuilder = {
         // Body items (clothes) - adjusted positions (moved up and made larger)
         body: {
             tshirt: { x: 250, y: 250, width: 380, height: 380, scale: 1.35, zIndex: 2 },
-            dress: { x: 250, y: 250, width: 410, height: 385, scale: 1.25, zIndex: 2 },
+            dress: { x: 250, y: 250, width: 410, height: 400, scale: 1.25, zIndex: 2 },
             coat: { x: 250, y: 250, width: 430, height: 385, scale: 1.25, zIndex: 2 },
             workaholic: { x: 250, y: 250, width: 380, height: 360, scale: 1.35, zIndex: 2 }
         },
         
         // Eyes accessories - adjusted for better fit (made larger)
         eyes: {
-            sunglasses: { x: 250, y: 165, width: 190, height: 190, scale: 1.35, zIndex: 5 },
-            glasses: { x: 250, y: 165, width: 180, height: 180, scale: 1.35, zIndex: 5 },
-            monocle: { x: 275, y: 160, width: 95, height: 95, scale: 1.35, zIndex: 5 },
-            'monad-flaming': { x: 250, y: 165, width: 210, height: 210, scale: 1.35, zIndex: 5 },
-            eye5: { x: 250, y: 165, width: 185, height: 185, scale: 1.35, zIndex: 5 },
-            eye6: { x: 250, y: 165, width: 200, height: 200, scale: 1.35, zIndex: 5 },
-            eye7: { x: 250, y: 165, width: 190, height: 190, scale: 1.35, zIndex: 5 }
+            sunglasses: { x: 250, y: 195, width: 190, height: 190, scale: 1.35, zIndex: 5 },
+            glasses: { x: 250, y: 195, width: 180, height: 180, scale: 1.35, zIndex: 5 },
+            monocle: { x: 275, y: 190, width: 95, height: 95, scale: 1.35, zIndex: 5 },
+            'monad-flaming': { x: 250, y: 195, width: 210, height: 210, scale: 1.35, zIndex: 5 },
+            eye5: { x: 250, y: 195, width: 185, height: 185, scale: 2.35, zIndex: 5 },
+            eye6: { x: 250, y: 195, width: 200, height: 200, scale: 2.35, zIndex: 5 },
+            eye7: { x: 250, y: 195, width: 190, height: 190, scale: 2.35, zIndex: 5 }
         },
         
         // Head accessories (hats) - adjusted for tap images (moved down and made larger)
