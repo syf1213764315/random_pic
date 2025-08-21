@@ -77,13 +77,13 @@ const CharacterBuilder = {
         
         // Mouth accessories - adjusted for better positioning (made larger)
         mouth: {
-            'shark-teeth': { x: 210, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 },
-            smile: { x: 250, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 },
-            tongue: { x: 250, y: 230, width: 102103, height: 210, scale: 1.35, zIndex: 4 },
-            mouth4: { x: 250, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 },
-            mouth5: { x: 250, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 },
-            mouth6: { x: 250, y: 227, width: 210, height: 210, scale: 1.35, zIndex: 4 },
-            mouth7: { x: 250, y: 225, width: 210, height: 210, scale: 1.35, zIndex: 4 }
+            'shark-teeth': { x: 250, y: 225, width: 210, height: 210, scale: 2.35, zIndex: 4 },
+            smile: { x: 250, y: 225, width: 210, height: 210, scale: 2.35, zIndex: 4 },
+            tongue: { x: 250, y: 230, width: 210, height: 210, scale: 2.35, zIndex: 4 },
+            mouth4: { x: 250, y: 225, width: 210, height: 210, scale: 2.35, zIndex: 4 },
+            mouth5: { x: 250, y: 225, width: 210, height: 210, scale: 2.35, zIndex: 4 },
+            mouth6: { x: 250, y: 227, width: 210, height: 210, scale: 2.35, zIndex: 4 },
+            mouth7: { x: 250, y: 225, width: 210, height: 210, scale: 2.35, zIndex: 4 }
         }
     },
     
