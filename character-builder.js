@@ -173,8 +173,13 @@ const CharacterBuilder = {
         const ctx = this.ctx;
         ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         
-        // Draw background
+        // Draw background first (synchronously or asynchronously)
         this.drawBackground();
+    },
+    
+    // Draw character and accessories (called after background is ready)
+    drawCharacterAndAccessories() {
+        const ctx = this.ctx;
         
         // Draw base character
         if (this.baseImage) {
@@ -206,28 +211,49 @@ const CharacterBuilder = {
         if (bgType === 'none') {
             ctx.fillStyle = '#F5F5F5';
             ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+            // Draw character after background
+            this.drawCharacterAndAccessories();
         } else {
             // First try to load background image
             const bgImageUrl = this.getItemImageUrl('background', bgType);
             
             if (bgImageUrl) {
-                // Load and draw background image
-                const bgImg = new Image();
-                bgImg.onload = () => {
-                    // Draw image to cover entire canvas
-                    ctx.drawImage(bgImg, 0, 0, this.canvasWidth, this.canvasHeight);
-                    
-                    // Redraw character on top of background
-                    this.drawCharacter();
-                };
-                bgImg.onerror = () => {
-                    // If image fails to load, fall back to gradient
-                    this.drawGradientBackground(bgType);
-                };
-                bgImg.src = bgImageUrl;
+                // Check if image is already cached
+                if (this.cachedBackgrounds && this.cachedBackgrounds[bgType]) {
+                    // Use cached image
+                    ctx.drawImage(this.cachedBackgrounds[bgType], 0, 0, this.canvasWidth, this.canvasHeight);
+                    this.drawCharacterAndAccessories();
+                } else {
+                    // Load and cache the background image
+                    const bgImg = new Image();
+                    bgImg.crossOrigin = 'anonymous';
+                    bgImg.onload = () => {
+                        // Cache the image
+                        if (!this.cachedBackgrounds) {
+                            this.cachedBackgrounds = {};
+                        }
+                        this.cachedBackgrounds[bgType] = bgImg;
+                        
+                        // Clear canvas and redraw everything in correct order
+                        ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                        
+                        // Draw background first
+                        ctx.drawImage(bgImg, 0, 0, this.canvasWidth, this.canvasHeight);
+                        
+                        // Then draw character and accessories on top
+                        this.drawCharacterAndAccessories();
+                    };
+                    bgImg.onerror = () => {
+                        // If image fails to load, fall back to gradient
+                        this.drawGradientBackground(bgType);
+                        this.drawCharacterAndAccessories();
+                    };
+                    bgImg.src = bgImageUrl;
+                }
             } else {
                 // If no image path defined, use gradient as fallback
                 this.drawGradientBackground(bgType);
+                this.drawCharacterAndAccessories();
             }
         }
     },
@@ -276,27 +302,45 @@ const CharacterBuilder = {
             }
         });
         
-        // Sort by z-index
+        // Sort by z-index (lower z-index drawn first)
         accessories.sort((a, b) => a.zIndex - b.zIndex);
+        
+        // Track loaded images
+        let imagesToLoad = accessories.length;
+        let imagesLoaded = 0;
+        
+        // If no accessories, we're done
+        if (imagesToLoad === 0) return;
         
         // Draw each accessory
         accessories.forEach(item => {
-            this.drawAccessory(item);
+            this.drawAccessory(item, () => {
+                imagesLoaded++;
+                // All images loaded, no need to re-render as each draws itself
+            });
         });
     },
     
     // Draw a single accessory
-    drawAccessory(item) {
+    drawAccessory(item, callback) {
         const ctx = this.ctx;
         
         // Get the image URL for this item
         const imageUrl = this.getItemImageUrl(item.category, item.name);
-        if (!imageUrl) return;
+        if (!imageUrl) {
+            if (callback) callback();
+            return;
+        }
         
-        // Create and load the image
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => {
+        // Check if image is cached
+        const cacheKey = `${item.category}_${item.name}`;
+        if (!this.cachedAccessories) {
+            this.cachedAccessories = {};
+        }
+        
+        if (this.cachedAccessories[cacheKey]) {
+            // Use cached image
+            const img = this.cachedAccessories[cacheKey];
             ctx.save();
             ctx.translate(item.x, item.y);
             ctx.scale(item.scale, item.scale);
@@ -315,8 +359,41 @@ const CharacterBuilder = {
                 item.height
             );
             ctx.restore();
-        };
-        img.src = imageUrl;
+            if (callback) callback();
+        } else {
+            // Load and cache the image
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                // Cache the image
+                this.cachedAccessories[cacheKey] = img;
+                
+                ctx.save();
+                ctx.translate(item.x, item.y);
+                ctx.scale(item.scale, item.scale);
+                
+                // Apply any rotation if needed
+                if (item.rotation) {
+                    ctx.rotate(item.rotation * Math.PI / 180);
+                }
+                
+                // Draw the image centered
+                ctx.drawImage(
+                    img,
+                    -item.width / 2,
+                    -item.height / 2,
+                    item.width,
+                    item.height
+                );
+                ctx.restore();
+                if (callback) callback();
+            };
+            img.onerror = () => {
+                console.error(`Failed to load accessory image: ${imageUrl}`);
+                if (callback) callback();
+            };
+            img.src = imageUrl;
+        }
     },
     
     // Get image URL for an item
