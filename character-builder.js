@@ -61,10 +61,10 @@ const CharacterBuilder = {
         
         // Shirt/Neck accessories (ornaments) - adjusted positions (moved up and made larger)
         shirt: {
-            collar: { x: 250, y: 260, width: 190, height: 150, scale: 2, zIndex: 5 },
-            bowtie: { x: 250, y: 260, width: 190, height: 150, scale: 2, zIndex: 5 },
-            medal: { x: 250, y: 260, width: 190, height: 150, scale: 2, zIndex: 5 },
-            workaholic: { x: 250, y: 260, width: 190, height: 150, scale: 2, zIndex: 5 }
+            collar: { x: 250, y: 260, width: 190, height: 150, scale: 2, zIndex: 7 },
+            bowtie: { x: 250, y: 260, width: 190, height: 150, scale: 2, zIndex: 7 },
+            medal: { x: 250, y: 260, width: 190, height: 150, scale: 2, zIndex: 7 },
+            workaholic: { x: 250, y: 260, width: 190, height: 150, scale: 2, zIndex: 7 }
         },
         
         // Handle items (ornaments) - adjusted positions (moved up and made larger)
