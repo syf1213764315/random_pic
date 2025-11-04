@@ -3,7 +3,7 @@ const AIGenerator = {
     // ⚠️ 安全提示：请在这里设置你的 OpenAI API Key
     // 注意：将 API Key 硬编码在客户端代码中存在安全风险
     // 建议：如果这是公开项目，请使用后端代理或环境变量
-    apiKey: '', // 👈 在这里替换为你的实际 API Key
+    apiKey: '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', // 👈 在这里替换为你的实际 API Key
     conversationHistory: [],
     
     // Initialize the AI generator
