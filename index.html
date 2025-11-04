@@ -111,6 +111,10 @@
                 <canvas id="character-canvas" width="500" height="500"></canvas>
             </div>
             <div class="action-buttons">
+                <button class="action-btn ai-btn" id="ai-btn">
+                    <span class="btn-icon">🤖</span>
+                    <span>AI生成</span>
+                </button>
                 <button class="action-btn save-btn" id="save-btn">
                     <span class="btn-icon">💾</span>
                     <span>Save</span>
@@ -180,9 +184,38 @@
         </div>
     </div>
 
+    <!-- AI Dialog Modal -->
+    <div class="ai-dialog-overlay" id="ai-dialog-overlay">
+        <div class="ai-dialog">
+            <div class="ai-dialog-header">
+                <h2>🤖 AI 生成小狗</h2>
+                <button class="close-btn" id="close-dialog-btn">×</button>
+            </div>
+            <div class="ai-dialog-body">
+                <div class="conversation-area" id="conversation-area">
+                    <div class="ai-message">
+                        <div class="message-bubble ai">
+                            <p>你好！我可以帮你生成个性化的小狗形象。请描述你想要的小狗特征，比如：</p>
+                            <ul>
+                                <li>"我想要一只酷酷的小狗，戴着牛仔帽和太阳镜"</li>
+                                <li>"帮我创建一个可爱的小狗，带着蝴蝶结"</li>
+                                <li>"生成一只未来科技风格的小狗"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <textarea id="user-input" placeholder="描述你想要的小狗特征..."></textarea>
+                    <button class="send-btn" id="send-btn">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="base-dog-image.js"></script>
     <script src="character-builder.js"></script>
     <script src="app-new.js"></script>
+    <script src="ai-generator.js"></script>
 </body>
 </html>
