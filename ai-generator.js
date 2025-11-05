@@ -3,7 +3,7 @@ const AIGenerator = {
     // ⚠️ 安全提示：请在这里设置你的 OpenAI API Key
     // 注意：将 API Key 硬编码在客户端代码中存在安全风险
     // 建议：如果这是公开项目，请使用后端代理或环境变量
-    apiKey: '', // 👈 在这里替换为你的实际 API Key
+    apiKey: 'sk-Y6ga5dcc5acaa4dd42dbccda9ade8d175ea71afa0e8vdF5e', // 👈 在这里替换为你的实际 API Key
     conversationHistory: [],
     
     // Initialize the AI generator
@@ -174,7 +174,7 @@ const AIGenerator = {
             content: userMessage
         });
 
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        const response = await fetch('https://api.gptsapi.net/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
