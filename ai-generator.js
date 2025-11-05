@@ -8,8 +8,8 @@ const AIGenerator = {
     
     // Initialize the AI generator
     init() {
-        // 如果已经设置了有效的 API Key，就不需要从 localStorage 加载
-        if (!this.apiKey || this.apiKey === 'YOUR_OPENAI_API_KEY_HERE') {
+        // 如果 API Key 为空，尝试从 localStorage 加载
+        if (!this.apiKey || this.apiKey.trim() === '') {
             this.loadApiKey();
         }
         this.setupEventListeners();
@@ -103,7 +103,7 @@ const AIGenerator = {
         userInput.value = '';
         
         // Check API key
-        if (!this.apiKey || this.apiKey === 'YOUR_OPENAI_API_KEY_HERE') {
+        if (!this.apiKey || this.apiKey.trim() === '') {
             this.showError('请先在 ai-generator.js 文件中设置 API Key');
             return;
         }
@@ -120,19 +120,18 @@ const AIGenerator = {
         this.showTypingIndicator();
         
         try {
-            // Call OpenAI API
+            // Call OpenAI API to generate image
             const response = await this.callOpenAI(message);
             
             // Remove typing indicator
             this.removeTypingIndicator();
             
-            // Add AI response to conversation
+            // Add AI response message to conversation
             this.addMessageToUI(response.message, 'ai');
             
-            // Apply the configuration if provided
-            if (response.configuration) {
-                this.applyConfiguration(response.configuration);
-                this.showSuccess('已应用配置到小狗！');
+            // Display generated image
+            if (response.imageUrl) {
+                this.displayGeneratedImage(response.imageUrl, response.prompt);
             }
             
         } catch (error) {
@@ -147,39 +146,27 @@ const AIGenerator = {
         }
     },
     
-    // Call OpenAI API
-    async callOpenAI(userMessage) {
-        const systemPrompt = `你是一个小狗角色定制助手。用户会描述他们想要的小狗特征，你需要：
+    // Generate image prompt from user description
+    async generateImagePrompt(userMessage) {
+        const systemPrompt = `你是一个图片提示词生成助手。用户会描述他们想要的小狗特征，你需要：
 1. 理解用户的描述
-2. 选择合适的配件组合
-3. 以友好的方式回复用户
-4. 返回配件配置的JSON
+2. 生成一个详细的英文图片提示词（prompt）
+3. 以友好的中文回复用户
 
-可用的配件类别和选项：
-- background: none, flower, fireworks, meadow, starry
-- body: none, tshirt, dress, coat, workaholic
-- eyes: none, sunglasses, glasses, monocle, monad-flaming, eye5, eye6, eye7
-- head: none, cap, wizard, crown, cowboy-beepbop, visor-headphone, plug, tap7
-- shirt: none, collar, bowtie, medal, workaholic
-- handle: none, balloon, flower, gift, gold-coin
-- mouth: none, shark-teeth, smile, tongue, mouth4, mouth5, mouth6, mouth7
+图片提示词要求：
+- 必须是英文
+- 描述要详细具体
+- 风格：卡通风格、可爱、高质量
+- 格式：cute cartoon dog character, [详细描述], high quality, digital art
 
-你的回复必须包含两部分：
-1. message: 给用户的友好回复（中文）
-2. configuration: 配件配置的JSON对象
+示例：
+用户："我想要一只戴着牛仔帽和太阳镜的酷狗"
+提示词："cute cartoon dog character wearing a cowboy hat and sunglasses, cool style, happy expression, colorful background, high quality digital art, detailed illustration"
 
-回复格式示例：
+只返回JSON格式：
 {
-  "message": "太棒了！我为你创建了一只酷酷的牛仔小狗，戴着牛仔帽和太阳镜，还有锋利的鲨鱼牙齿！",
-  "configuration": {
-    "background": "starry",
-    "body": "workaholic",
-    "eyes": "sunglasses",
-    "head": "cowboy-beepbop",
-    "shirt": "collar",
-    "handle": "none",
-    "mouth": "shark-teeth"
-  }
+  "message": "中文回复",
+  "prompt": "英文图片提示词"
 }`;
 
         this.conversationHistory.push({
@@ -212,23 +199,64 @@ const AIGenerator = {
         const data = await response.json();
         const aiResponse = data.choices[0].message.content;
         
-        // Add AI response to conversation history
-        this.conversationHistory.push({
-            role: 'assistant',
-            content: aiResponse
-        });
-
         // Parse the JSON response
         try {
             const parsed = JSON.parse(aiResponse);
+            
+            // Add to conversation history
+            this.conversationHistory.push({
+                role: 'assistant',
+                content: aiResponse
+            });
+            
             return parsed;
         } catch (e) {
             console.error('Failed to parse AI response:', aiResponse);
-            return {
-                message: aiResponse,
-                configuration: null
-            };
+            throw new Error('无法解析AI回复');
         }
+    },
+    
+    // Call DALL-E API to generate image
+    async generateImage(prompt) {
+        const response = await fetch('https://api.openai.com/v1/images/generations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.apiKey}`
+            },
+            body: JSON.stringify({
+                model: 'dall-e-3',
+                prompt: prompt,
+                n: 1,
+                size: '1024x1024',
+                quality: 'standard',
+                style: 'vivid'
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error?.message || '图片生成失败');
+        }
+
+        const data = await response.json();
+        return data.data[0].url; // 返回图片URL
+    },
+    
+    // Call OpenAI API (main function)
+    async callOpenAI(userMessage) {
+        // Step 1: Generate image prompt from user description
+        const promptResult = await this.generateImagePrompt(userMessage);
+        
+        // Step 2: Generate image using DALL-E
+        const imageUrl = await this.generateImage(promptResult.prompt);
+        
+        // Return both message and image URL
+        return {
+            message: promptResult.message,
+            imageUrl: imageUrl,
+            prompt: promptResult.prompt
+        };
     },
     
     // Add message to UI
@@ -303,28 +331,87 @@ const AIGenerator = {
         }
     },
     
-    // Apply configuration to character
-    applyConfiguration(config) {
-        if (!config) return;
+    // Display generated image in conversation
+    displayGeneratedImage(imageUrl, prompt) {
+        const conversationArea = document.getElementById('conversation-area');
+        if (!conversationArea) return;
         
-        // Check if CharacterBuilder exists
-        if (typeof CharacterBuilder === 'undefined') {
-            console.error('CharacterBuilder not found');
-            return;
-        }
+        const imageDiv = document.createElement('div');
+        imageDiv.className = 'ai-message';
         
-        // Apply each item
-        Object.keys(config).forEach(category => {
-            const itemId = config[category];
-            if (itemId && CharacterBuilder.currentItems.hasOwnProperty(category)) {
-                CharacterBuilder.updateItem(category, itemId);
-            }
+        const bubble = document.createElement('div');
+        bubble.className = 'message-bubble ai';
+        
+        // Create image element
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = 'AI生成的小狗图片';
+        img.className = 'generated-image';
+        img.style.cssText = `
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 8px;
+            display: block;
+            cursor: pointer;
+        `;
+        
+        // Add click to download
+        img.addEventListener('click', () => {
+            this.downloadImage(imageUrl);
         });
         
-        // Update UI if App exists
-        if (typeof App !== 'undefined') {
-            App.updateSelectionDisplay();
-        }
+        // Add download button
+        const downloadBtn = document.createElement('button');
+        downloadBtn.className = 'download-image-btn';
+        downloadBtn.textContent = '⬇ 下载图片';
+        downloadBtn.style.cssText = `
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        `;
+        downloadBtn.addEventListener('mouseenter', () => {
+            downloadBtn.style.background = 'rgba(255, 255, 255, 0.3)';
+        });
+        downloadBtn.addEventListener('mouseleave', () => {
+            downloadBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+        });
+        downloadBtn.addEventListener('click', () => {
+            this.downloadImage(imageUrl);
+        });
+        
+        bubble.appendChild(img);
+        bubble.appendChild(downloadBtn);
+        imageDiv.appendChild(bubble);
+        
+        conversationArea.appendChild(imageDiv);
+        
+        // Scroll to bottom
+        conversationArea.scrollTop = conversationArea.scrollHeight;
+    },
+    
+    // Download image
+    downloadImage(imageUrl) {
+        fetch(imageUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ai-dog-${Date.now()}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+                this.showSuccess('图片已下载！');
+            })
+            .catch(error => {
+                console.error('下载失败:', error);
+                this.showError('下载失败，请重试');
+            });
     },
     
     // Show error message
