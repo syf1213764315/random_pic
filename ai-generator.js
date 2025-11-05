@@ -8,7 +8,7 @@ const AIGenerator = {
     
     // Initialize the AI generator
     init() {
-        // 如果 API Key 为空，尝试从 localStorage 加载
+        // 如果 API Key 为空，尝试从 localStorage 加载（作为备选）
         if (!this.apiKey || this.apiKey.trim() === '') {
             this.loadApiKey();
         }
@@ -74,22 +74,12 @@ const AIGenerator = {
         }
     },
     
-    // Load API key from localStorage
+    // Load API key from localStorage (fallback if apiKey is empty)
     loadApiKey() {
         const savedKey = localStorage.getItem('openai_api_key');
-        if (savedKey) {
+        if (savedKey && (!this.apiKey || this.apiKey.trim() === '')) {
             this.apiKey = savedKey;
-            const input = document.getElementById('api-key-input');
-            if (input) {
-                input.value = savedKey;
-            }
         }
-    },
-    
-    // Save API key to localStorage
-    saveApiKey(key) {
-        this.apiKey = key;
-        localStorage.setItem('openai_api_key', key);
     },
     
     // Send message to OpenAI
@@ -218,7 +208,7 @@ const AIGenerator = {
     
     // Call DALL-E API to generate image
     async generateImage(prompt) {
-        const response = await fetch('https://api.openai.com/v1/images/generations', {
+        const response = await fetch('https://api.gptsapi.net/v1/images/generations', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
